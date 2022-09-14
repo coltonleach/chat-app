@@ -1,0 +1,157 @@
+@import '../global.scss';
+
+.chat-container {
+  display: flex;
+  width: 900px;
+  height: 600px;
+  background-color: $clr-700;
+  border-radius: 0.5rem;
+  overflow: hidden;
+
+  .chat-list {
+    flex: 2;
+    background-color: $clr-500;
+
+    .profile-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      background-color: $clr-700;
+      padding: 1rem;
+
+      button {
+        background-color: $clr-800;
+        color: $clr-100;
+        border: solid 1px $clr-400;
+        border-radius: 0.3rem;
+        font-size: 0.75rem;
+        padding: 0.5rem 0.75rem;
+      }
+    }
+    
+    input[type='text'] {
+      color: $clr-100;
+      background-color: $clr-400;
+      border: none;
+      padding: 0.5rem 1rem;
+      width: 100%;
+      overflow: hidden;
+      font-size: 1rem;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .chat-card {
+      display: flex;
+      align-items: center;
+      padding: 0.5rem;
+      margin: 3px;
+      border-radius: 0.25rem;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $clr-700;
+      }
+      
+      img {
+        border-radius: 50%;
+        height: 50px;
+        width: 50px;
+      }
+    
+      p {
+        margin-left: 1rem;
+        font-size: 1.125rem;
+        
+      }
+    }
+    .selected {
+      background-color: $clr-700;
+    }
+  }
+
+  .chat-window {
+    position: relative;
+    flex: 5;
+    overflow-y: hidden;
+
+    h2 {
+      position: sticky;
+      top: 0;
+      font-weight: 600;
+      background-color: $clr-800;
+      padding: 1rem;
+    }
+
+    .message-container {
+      height: calc(100% - 60px - 82px - 2rem);
+      //60px: header, 82px: size of textarea, 2rem: margin of message-input-container
+      margin: auto 0;
+      overflow-y: scroll;
+
+      .message {
+        padding: 0.5rem 0.75rem;
+        margin: 0.5rem 1rem;
+        max-width: 300px;
+        width: max-content;
+      }
+
+      .sent {
+        margin-left: auto;
+        border-radius: 0.5rem 0 0.5rem 0.5rem;
+        background-color: $clr-600;
+        border: 1px solid $clr-400;
+      }
+
+      .received {
+        border-radius: 0 0.5rem 0.5rem 0.5rem;
+        background-color: $clr-500;
+        border: 1px solid $clr-400;
+        color: $clr-100;
+      }
+    }
+
+    .message-input-container{
+      position: sticky;
+      display: flex;
+      align-items: center;
+      bottom: 0;
+      background-color: $clr-800;
+      border: 2px solid $clr-500;
+      border-radius: 0.5rem;
+      margin: 1rem;
+
+      &:focus-within {
+        border: 2px solid $clr-400;
+      }
+
+      label {
+        cursor: pointer;
+        width: max-content;
+      }
+
+      svg {
+        position: relative;
+        height: 100%;
+        fill: $clr-100;
+        left: 6px;
+      }
+
+      textarea {
+        position: relative;
+        width: 90%;
+        margin: 1rem auto;
+        border: none;
+        background-color: $clr-800;
+        resize: none;
+        overflow-y: hidden;
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+  }
+}
