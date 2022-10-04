@@ -1,6 +1,8 @@
 @import './variables.scss';
 
-a, button {
+a,
+button,
+.btn-avatar {
   color: $clr-900;
   font-size: 1rem;
   border: none;
@@ -24,4 +26,13 @@ a, button {
   background-color: transparent;
   color: $clr-100;
   border: 1px solid $clr-900;
+}
+
+.btn-logout {
+  position: absolute;
+  margin: 1rem;
+  top: 0;
+  right: 0;
+  font-size: 0.75rem;
+  padding: 0.35rem 0.65rem;
 }

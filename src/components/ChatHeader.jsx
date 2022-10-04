@@ -1,14 +1,25 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { Link } from 'react-router-dom'
+import { signOut } from 'firebase/auth'
+import { auth } from '../firebase'
+import { AuthContext } from '../context/AuthContext'
 
 const ChatHeader = () => {
-  const handleLogout = () => {
-    console.log('logout')
-  }
+  const { currentUser } = useContext(AuthContext)
 
   return (
     <div className='profile-header'>
-      <p>Colton</p>
-      <button onClick={handleLogout}>logout</button>
+      <img
+        src={currentUser.photoURL}
+        style={{
+          width: '30px',
+          height: '30px',
+          objectFit: 'cover',
+          borderRadius: '50%',
+        }}
+      />
+      <p>{currentUser.displayName}</p>
+      <Link to='/settings'>settings</Link>
     </div>
   )
 }

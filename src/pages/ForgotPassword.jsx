@@ -4,10 +4,10 @@ import '../utils/buttons.scss'
 import '../styles/form.scss'
 
 const Login = () => {
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault()
     console.log(e)
-    console.log("Recover password")
+    console.log('Recover password')
   }
 
   return (
@@ -15,10 +15,10 @@ const Login = () => {
       <h2 className='title'>Recover Password</h2>
       <form className='form' onSubmit={handleSubmit}>
         <label>Email associated with your account:</label>
-        <input type="email"/>
+        <input type='email' />
         <div className='btn-container'>
           <button className='btn-primary'>Recover Password</button>
-          <Link to='/' className='btn-secondary'>Cancel</Link>
+          <Link to='/login' className='btn-secondary'>Cancel</Link>
         </div>
       </form>
     </div>

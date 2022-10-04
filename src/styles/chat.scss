@@ -14,21 +14,28 @@
 
     .profile-header {
       display: flex;
-      justify-content: space-between;
-      align-items: baseline;
+      align-items: center;
       background-color: $clr-700;
+      height: 4rem;
       padding: 1rem;
 
-      button {
+      p {
+        margin-left: 0.5rem;
+        max-width: 15ch;
+        overflow-wrap: break-word;
+      }
+
+      a {
         background-color: $clr-800;
         color: $clr-100;
         border: solid 1px $clr-400;
         border-radius: 0.3rem;
         font-size: 0.75rem;
-        padding: 0.5rem 0.75rem;
+        padding: 0.5rem 0.65rem;
+        margin-left: auto;
       }
     }
-    
+
     input[type='text'] {
       color: $clr-100;
       background-color: $clr-400;
@@ -54,17 +61,16 @@
       &:hover {
         background-color: $clr-700;
       }
-      
+
       img {
         border-radius: 50%;
         height: 50px;
         width: 50px;
       }
-    
+
       p {
         margin-left: 1rem;
         font-size: 1.125rem;
-        
       }
     }
     .selected {
@@ -77,17 +83,31 @@
     flex: 5;
     overflow-y: hidden;
 
-    h2 {
+    .chat-header {
+      display: flex;
+      align-items: center;
       position: sticky;
       top: 0;
-      font-weight: 600;
       background-color: $clr-800;
-      padding: 1rem;
+      height: 4rem;
+      padding: 0 1rem;
+      gap: 1rem;
+
+      img {
+        border-radius: 50%;
+        height: 50px;
+        width: 50px;
+      }
+
+      h2 {
+        font-weight: 600;
+        font-size: 1.5rem;
+      }
     }
 
     .message-container {
-      height: calc(100% - 60px - 82px - 2rem);
-      //60px: header, 82px: size of textarea, 2rem: margin of message-input-container
+      height: calc(100% - 60px - 84px - 2rem);
+      //60px: header, 84px: size of textarea, 2rem: margin of message-input-container
       margin: auto 0;
       overflow-y: scroll;
 
@@ -113,7 +133,7 @@
       }
     }
 
-    .message-input-container{
+    .message-input-container {
       position: sticky;
       display: flex;
       align-items: center;
@@ -122,6 +142,7 @@
       border: 2px solid $clr-500;
       border-radius: 0.5rem;
       margin: 1rem;
+      padding: 1rem 0;
 
       &:focus-within {
         border: 2px solid $clr-400;
@@ -129,20 +150,26 @@
 
       label {
         cursor: pointer;
-        width: max-content;
+        max-width: 50px;
+        margin: 0 0.5rem;
+        transition: all 50ms ease;
+
+        &:hover {
+          scale: 1.1;
+        }
+      }
+
+      input[type='file'] {
+        display: none;
       }
 
       svg {
-        position: relative;
-        height: 100%;
         fill: $clr-100;
-        left: 6px;
       }
 
       textarea {
         position: relative;
-        width: 90%;
-        margin: 1rem auto;
+        width: 80%;
         border: none;
         background-color: $clr-800;
         resize: none;
@@ -150,6 +177,22 @@
 
         &:focus {
           outline: none;
+        }
+      }
+
+      .send-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $clr-900;
+        height: 3rem;
+        width: 3rem;
+        border-radius: 50%;
+        transition: all 50ms ease;
+        cursor: pointer;
+
+        &:hover {
+          scale: 1.1;
         }
       }
     }
