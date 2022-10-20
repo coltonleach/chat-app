@@ -1,13 +1,26 @@
-import { useState } from 'react'
-import AttachmentSvg from '../assets/svgcomponents/AttachmentSvg'
-import SendSvg from '../assets/svgcomponents/SendSvg'
+import { doc, onSnapshot } from 'firebase/firestore'
+import { useEffect } from 'react'
+import { useContext, useState } from 'react'
+import { AuthContext } from '../context/AuthContext'
+import { ChatContext } from '../context/ChatContext'
+import { db } from '../firebase'
+import Input from './Input'
 
-const ChatWindow = ({ active }) => {
-  const handleSend = () => {
-    console.log('sending...')
-  }
+const ChatWindow = () => {
+  const { currentUser } = useContext(AuthContext)
+  const { data } = useContext(ChatContext)
+  const [messages, setMessages] = useState([])
 
-  if (!active) {
+  useEffect(() => {
+    const unSub = onSnapshot(doc(db, 'chats', data.chatId), (doc) => {
+      doc.exists() && setMessages(doc.data().messages)
+    })
+    return () => {
+      unSub()
+    }
+  }, [data.chatId])
+
+  if (!Object.keys(data.user).length) {
     return (
       <div
         className='chat-window'
@@ -21,28 +34,35 @@ const ChatWindow = ({ active }) => {
       </div>
     )
   }
-
   return (
     <div className='chat-window'>
       <div className='chat-header'>
-        <img alt='avatar' src={'https://i.pravatar.cc/200'} />
-        <h2>Brice</h2>
+        <img alt='avatar' src={data.user?.photoURL} />
+        <h2>{data.user?.displayName}</h2>
       </div>
       <div className='message-container'>
-        <p className='message sent'>Hey how goes it?</p>
-        <p className='message sent'>Anything new or exciting?</p>
-        <p className='message received'>I'm doing well!</p>
+        {messages.map((message) => {
+          const type =
+            currentUser.uid === message?.senderId ? 'sent' : 'received'
+          if (message.hasOwnProperty('img')) {
+            return (
+              <img
+                key={message.id}
+                className={`message message-img ${type}`}
+                src={message.img}
+                alt='user-image'
+              />
+            )
+          }
+
+          return (
+            <p className={`message ${type}`} key={message.id}>
+              {message.text}
+            </p>
+          )
+        })}
       </div>
-      <div className='message-input-container'>
-        <label htmlFor='attachment'>
-          <AttachmentSvg height={42} />
-        </label>
-        <input type='file' id='attachment' name='attachment'></input>
-        <textarea autoFocus />
-        <div className='send-container' onClick={handleSend}>
-          <SendSvg />
-        </div>
-      </div>
+      <Input />
     </div>
   )
 }
