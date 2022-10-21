@@ -5,9 +5,10 @@ import { AuthContext } from '../context/AuthContext'
 import { ChatContext } from '../context/ChatContext'
 import { db } from '../firebase'
 import Input from './Input'
+import ChatHeader from './ChatHeader'
+import MessageContainer from './MessageContainer'
 
 const ChatWindow = () => {
-  const { currentUser } = useContext(AuthContext)
   const { data } = useContext(ChatContext)
   const [messages, setMessages] = useState([])
 
@@ -36,32 +37,8 @@ const ChatWindow = () => {
   }
   return (
     <div className='chat-window'>
-      <div className='chat-header'>
-        <img alt='avatar' src={data.user?.photoURL} />
-        <h2>{data.user?.displayName}</h2>
-      </div>
-      <div className='message-container'>
-        {messages.map((message) => {
-          const type =
-            currentUser.uid === message?.senderId ? 'sent' : 'received'
-          if (message.hasOwnProperty('img')) {
-            return (
-              <img
-                key={message.id}
-                className={`message message-img ${type}`}
-                src={message.img}
-                alt='user-image'
-              />
-            )
-          }
-
-          return (
-            <p className={`message ${type}`} key={message.id}>
-              {message.text}
-            </p>
-          )
-        })}
-      </div>
+      <ChatHeader />
+      <MessageContainer messages={messages} />
       <Input />
     </div>
   )

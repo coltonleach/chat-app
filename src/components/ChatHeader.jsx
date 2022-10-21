@@ -1,25 +1,13 @@
-import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
-import { signOut } from 'firebase/auth'
-import { auth } from '../firebase'
-import { AuthContext } from '../context/AuthContext'
+import { useContext } from 'react'
+import { ChatContext } from '../context/ChatContext'
 
 const ChatHeader = () => {
-  const { currentUser } = useContext(AuthContext)
+  const { data } = useContext(ChatContext)
 
   return (
-    <div className='profile-header'>
-      <img
-        src={currentUser.photoURL}
-        style={{
-          width: '30px',
-          height: '30px',
-          objectFit: 'cover',
-          borderRadius: '50%',
-        }}
-      />
-      <p>{currentUser.displayName}</p>
-      <Link to='/settings'>settings</Link>
+    <div className='chat-header'>
+      <img alt='avatar' src={data.user?.photoURL} />
+      <h2>{data.user?.displayName}</h2>
     </div>
   )
 }

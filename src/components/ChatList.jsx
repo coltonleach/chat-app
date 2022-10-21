@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react'
 import ChatCard from './ChatCard'
-import ChatHeader from '../components/ChatHeader'
+import ListHeader from './ListHeader'
 import SearchUser from './SearchUser'
 import { doc, onSnapshot } from 'firebase/firestore'
 import { db } from '../firebase'
@@ -33,17 +33,19 @@ const ChatList = () => {
 
   return (
     <div className='chat-list'>
-      <ChatHeader />
+      <ListHeader />
       <SearchUser />
-      {Object.entries(chats)?.map((chat) => (
-        <ChatCard
-          key={chat[0]}
-          id={chat[0]}
-          name={chat[1].userInfo.displayName}
-          avatar={chat[1].userInfo.photoURL}
-          handleSelect={() => handleSelect(chat[1].userInfo)}
-        />
-      ))}
+      {Object.entries(chats)
+        ?.sort((a, b) => b[1].date - a[1].date)
+        .map((chat) => (
+          <ChatCard
+            key={chat[0]}
+            id={chat[0]}
+            name={chat[1].userInfo.displayName}
+            avatar={chat[1].userInfo.photoURL}
+            handleSelect={() => handleSelect(chat[1].userInfo)}
+          />
+        ))}
     </div>
   )
 }
