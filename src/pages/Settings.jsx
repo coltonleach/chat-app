@@ -1,17 +1,15 @@
-import React, { useState, useRef, useContext } from 'react'
+import React, { useState, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { updateProfile, updatePassword, signOut } from 'firebase/auth'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import { doc, updateDoc } from 'firebase/firestore'
 import { auth, storage, db } from '../firebase'
-import { AuthContext } from '../context/AuthContext'
 import Notification from '../components/Notification'
 import '../utils/buttons.scss'
 import '../styles/form.scss'
 
 const Settings = () => {
   const navigate = useNavigate()
-  const { currentUser } = useContext(AuthContext)
   const handleLogout = () => {
     signOut(auth)
     navigate('/login')

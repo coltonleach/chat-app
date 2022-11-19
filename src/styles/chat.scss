@@ -2,15 +2,14 @@
 
 .chat-container {
   display: flex;
-  width: 900px;
-  height: 600px;
+  width: 100vw;
+  height: 100vh;
   background-color: $clr-700;
-  border-radius: 0.5rem;
   overflow: hidden;
 
   .chat-list {
-    flex: 2;
     background-color: $clr-500;
+    width: 260px;
 
     .profile-header {
       display: flex;
@@ -114,12 +113,14 @@
       .message {
         padding: 0.5rem 0.75rem;
         margin: 0.5rem 1rem;
-        max-width: 300px;
+        max-width: 50%;
         width: max-content;
+        word-wrap: break-word;
       }
 
       .message-img {
         display: block;
+        max-height: 400px;
       }
 
       .sent {
@@ -152,6 +153,27 @@
         border: 2px solid $clr-400;
       }
 
+      .selected-attachment-container {
+        position: absolute;
+        bottom: 100%;
+        left: 0;
+        margin: 0.5rem;
+        border-radius: 0.35rem;
+        border: solid 1px $clr-200;
+        background-color: $clr-800;
+        width: 200px;
+        height: 200px;
+        overflow: hidden;
+
+        .selected-attachment {
+          position: relative;
+          margin: auto 0;
+          width: 200px;
+          height: 200px;
+          object-fit: contain;
+        }
+      }
+
       label {
         cursor: pointer;
         max-width: 50px;
@@ -173,7 +195,7 @@
 
       textarea {
         position: relative;
-        width: 80%;
+        flex: 1;
         border: none;
         background-color: $clr-800;
         resize: none;
@@ -192,6 +214,7 @@
         height: 3rem;
         width: 3rem;
         border-radius: 50%;
+        margin: 0 1rem;
         transition: all 50ms ease;
         cursor: pointer;
 

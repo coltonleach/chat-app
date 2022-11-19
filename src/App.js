@@ -23,17 +23,11 @@ import Settings from './pages/Settings'
   way I have the storage setup, but should be relatively
   simple to fix.
     * HIGH PRIORITY
-  Redesign the layout. Get rid of the fixed windows size,
-  make it more dynamic
-    * LOW PRIORITY
   Add multiple color themes that users can choose from
     * LOW PRIORITY
   Make it more clear when a user has an image attached
   to their chat.
     * LOW PRIORITY
-  Make the enter key send the message instead of relying
-  on the button in the chat box
-    * LOW
   Display multiple users when searching for users, as
   well as allowing for a more general search query
   instead of an exact query

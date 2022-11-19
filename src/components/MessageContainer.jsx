@@ -15,13 +15,15 @@ const MessageContainer = ({ messages }) => {
         const type = currentUser.uid === message?.senderId ? 'sent' : 'received'
         if (message.hasOwnProperty('img')) {
           return (
-            <img
-              ref={messageRef}
-              key={message.id}
-              className={`message message-img ${type}`}
-              src={message.img}
-              alt='user-image'
-            />
+            <a href={message.img} target='_blank'>
+              <img
+                ref={messageRef}
+                key={message.id}
+                className={`message message-img ${type}`}
+                src={message.img}
+                alt='user-image'
+              />
+            </a>
           )
         }
 

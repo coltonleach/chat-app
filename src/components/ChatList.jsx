@@ -35,17 +35,18 @@ const ChatList = () => {
     <div className='chat-list'>
       <ListHeader />
       <SearchUser />
-      {Object.entries(chats)
-        ?.sort((a, b) => b[1].date - a[1].date)
-        .map((chat) => (
-          <ChatCard
-            key={chat[0]}
-            id={chat[0]}
-            name={chat[1].userInfo.displayName}
-            avatar={chat[1].userInfo.photoURL}
-            handleSelect={() => handleSelect(chat[1].userInfo)}
-          />
-        ))}
+      {chats &&
+        Object.entries(chats)
+          ?.sort((a, b) => b[1].date - a[1].date)
+          .map((chat) => (
+            <ChatCard
+              key={chat[0]}
+              id={chat[0]}
+              name={chat[1].userInfo.displayName}
+              avatar={chat[1].userInfo.photoURL}
+              handleSelect={() => handleSelect(chat[1].userInfo)}
+            />
+          ))}
     </div>
   )
 }

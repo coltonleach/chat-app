@@ -1,4 +1,4 @@
-import { useRef, useContext } from 'react'
+import { useRef, useContext, useState } from 'react'
 import AttachmentSvg from '../assets/svgcomponents/AttachmentSvg'
 import SendSvg from '../assets/svgcomponents/SendSvg'
 import {
@@ -15,6 +15,7 @@ import { AuthContext } from '../context/AuthContext'
 import { ChatContext } from '../context/ChatContext'
 
 const Input = () => {
+  const [image, setImage] = useState(null)
   const textRef = useRef()
   const imageRef = useRef()
   const { currentUser } = useContext(AuthContext)
@@ -24,7 +25,7 @@ const Input = () => {
     const image = imageRef.current.files[0]
     const text = textRef.current.value
     if (image) {
-      //send image and text
+      //send image
       const storageRef = ref(storage, uuid())
       const uploadTask = uploadBytesResumable(storageRef, image)
       uploadTask.on(
@@ -54,8 +55,9 @@ const Input = () => {
         }
       )
       imageRef.current.value = ''
-    } else if (text) {
-      //just send text
+    }
+    if (text) {
+      //send text
       await updateDoc(doc(db, 'chats', data.chatId), {
         messages: arrayUnion({
           id: uuid(),
@@ -80,10 +82,26 @@ const Input = () => {
       },
       [data.chatId + '.date']: serverTimestamp(),
     })
+    setImage(null)
   }
 
+  const handleKeyDown = (e) =>
+    e.code === 'Enter' && !e.shiftKey ? handleSend() : null
+
+  const handleAttachment = (e) => {
+    setImage(e.target.files[0])
+  }
   return (
     <div className='message-input-container'>
+      {image && (
+        <div className='selected-attachment-container'>
+          <img
+            className='selected-attachment'
+            alt='avatar'
+            src={URL.createObjectURL(image)}
+          />
+        </div>
+      )}
       <label htmlFor='attachment'>
         <AttachmentSvg height={42} />
       </label>
@@ -93,8 +111,9 @@ const Input = () => {
         name='attachment'
         accept='image/*'
         ref={imageRef}
+        onChange={(e) => handleAttachment(e)}
       ></input>
-      <textarea autoFocus ref={textRef} />
+      <textarea autoFocus ref={textRef} onKeyDown={handleKeyDown} />
       <div className='send-container' onClick={handleSend}>
         <SendSvg />
       </div>
