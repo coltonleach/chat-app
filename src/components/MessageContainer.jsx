@@ -34,6 +34,7 @@ const MessageContainer = ({ messages }) => {
         return (
           <p ref={messageRef} className={`message ${type}`} key={message.id}>
             {message.text}
+            {console.log(message.text)}
           </p>
         )
       })}
