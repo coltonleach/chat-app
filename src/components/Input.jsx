@@ -13,6 +13,7 @@ import { v4 as uuid } from 'uuid'
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
 import { AuthContext } from '../context/AuthContext'
 import { ChatContext } from '../context/ChatContext'
+import { IoTrashBin } from 'react-icons/io5'
 
 const Input = () => {
   const [image, setImage] = useState(null)
@@ -91,10 +92,17 @@ const Input = () => {
   const handleAttachment = (e) => {
     setImage(e.target.files[0])
   }
+
+  const handleClose = () => {
+    setImage(null)
+    imageRef.current.value = ''
+    console.log('delete')
+  }
   return (
     <div className='message-input-container'>
       {image && (
         <div className='selected-attachment-container'>
+          <IoTrashBin onClick={handleClose} />
           <img
             className='selected-attachment'
             alt='avatar'

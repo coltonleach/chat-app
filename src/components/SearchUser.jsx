@@ -62,10 +62,7 @@ const SearchUser = () => {
   }
 
   const handleSearch = async () => {
-    const q = query(
-      collection(db, 'users'),
-      where('displayName', '==', searchUser)
-    )
+    const q = query(collection(db, 'users'), where('email', '==', searchUser))
 
     try {
       const querySnapshot = await getDocs(q)
@@ -85,7 +82,7 @@ const SearchUser = () => {
     <div>
       <input
         type='text'
-        placeholder='search a user...'
+        placeholder='search a user by email...'
         maxLength={30}
         onChange={(e) => setSearchUser(e.target.value)}
         onKeyDown={handleKey}

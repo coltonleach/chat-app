@@ -25,16 +25,6 @@ import Settings from './pages/Settings'
     * HIGH PRIORITY
   Add multiple color themes that users can choose from
     * LOW PRIORITY
-  Make it more clear when a user has an image attached
-  to their chat.
-    * LOW PRIORITY
-  Display multiple users when searching for users, as
-  well as allowing for a more general search query
-  instead of an exact query
-    * MEDIUM
-  Make the images clickable to either fullscreen or open
-  in a new tab
-    *LOW
   
 */
 

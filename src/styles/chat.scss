@@ -105,9 +105,10 @@
     }
 
     .message-container {
+      display: flex;
+      flex-direction: column;
       height: calc(100% - 60px - 84px - 2rem);
       //60px: header, 84px: size of textarea, 2rem: margin of message-input-container
-      margin: auto 0;
       overflow-y: scroll;
 
       .message {
@@ -119,12 +120,11 @@
       }
 
       .message-img {
-        display: block;
         max-height: 400px;
       }
 
       .sent {
-        margin-left: auto;
+        align-self: flex-end;
         border-radius: 0.5rem 0 0.5rem 0.5rem;
         background-color: $clr-600;
         border: 1px solid $clr-400;
@@ -163,13 +163,21 @@
         background-color: $clr-800;
         width: 200px;
         height: 200px;
-        overflow: hidden;
+
+        svg {
+          position: absolute;
+          margin: 0.5rem;
+          width: 30px;
+          height: 30px;
+          right: 0;
+          fill: $clr-error-text;
+          background-color: $clr-800;
+          cursor: pointer;
+        }
 
         .selected-attachment {
-          position: relative;
-          margin: auto 0;
           width: 200px;
-          height: 200px;
+          height: 198px;
           object-fit: contain;
         }
       }
