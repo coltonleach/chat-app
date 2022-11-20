@@ -48,6 +48,7 @@ const Login = () => {
           message: 'That account is currently disabled!',
           success: false,
         })
+      else setNotification({ message: 'Something went wrong!', success: false })
     }
 
     setTimeout(() => {
